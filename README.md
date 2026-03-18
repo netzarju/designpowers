@@ -8,7 +8,9 @@
 
 Your design skills, amplified.
 
-Designpowers is a Claude Code plugin that gives you a team of 8 design agents. They discover, research, strategise, design, build, review, and hand off — with accessibility woven into every step. You're the creative director. They work for you.
+Designpowers is an open, model-agnostic design workflow that gives you a team of 8 design agents. They discover, research, strategise, design, build, review, and hand off — with accessibility woven into every step. You're the creative director. They work for you.
+
+**Works with any AI coding tool.** Designpowers is markdown files — skills, agents, and hooks. It's built as a Claude Code plugin, but the design knowledge works anywhere that reads markdown instructions: Cursor, Windsurf, Copilot, Aider, or any future tool. The design process is the product, not the platform.
 
 ## What You Get
 
@@ -125,16 +127,14 @@ Plus two coordination skills:
 
 ## Installation
 
-### Claude Code (via Plugin Marketplace)
+### Claude Code (recommended)
 
 ```bash
 /plugin marketplace add Owl-Listener/designpowers
 /plugin install designpowers@designpowers
 ```
 
-### Manual Installation
-
-Clone and copy into your `~/.claude/` directory:
+Or manually:
 
 ```bash
 git clone https://github.com/Owl-Listener/designpowers.git
@@ -143,9 +143,20 @@ cp -r designpowers/agents/* ~/.claude/agents/
 cp -r designpowers/hooks/* ~/.claude/hooks/
 ```
 
+### Other AI Tools (Cursor, Windsurf, Copilot, Aider, etc.)
+
+Designpowers is markdown. The skills and agents work with any tool that can read instruction files:
+
+1. Clone the repo
+2. Copy the `skills/` and `agents/` folders into your project or tool's instruction directory
+3. Point your tool at the `using-designpowers/SKILL.md` file as a system instruction or rules file
+4. The design workflow activates when you describe something to build
+
+The hook system is Claude Code-specific, but the skills and agents are universal. Adapt the file paths to your tool's conventions.
+
 ### Verify
 
-Start a new session and describe something to design. You should see the bird and the welcome screen.
+Start a new session and describe something to design. You should see the bird and the welcome screen (Claude Code), or the discovery process should begin (other tools).
 
 ## Works With Superpowers
 
