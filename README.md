@@ -27,7 +27,7 @@ Designpowers is an open, model-agnostic design workflow that gives you a team of
 | **accessibility-reviewer** | WCAG/COGA evaluation, audits output, loops back with fixes |
 | **design-critic** | Reviews against brief, plan, principles; loops back with gaps |
 
-**16 skills** that enforce a complete design workflow — from discovery through handoff.
+**21 skills** that enforce a complete design workflow — from discovery through handoff.
 
 **2 modes** — Direct (you approve every handoff) and Auto (agents run the pipeline, you review at the end).
 
@@ -89,6 +89,11 @@ Discover → Research → Strategise → Plan → Design → Build → Review �
 | Systems | `design-system-alignment` | Tokens, components, naming, consistency |
 | Critique | `designpowers-critique` | Review against plan, principles, personas |
 | Handoff | `design-handoff` | Specs, rationale, accessibility requirements |
+| Testing | `usability-testing` | Plan tests, recruit participants, analyse findings, turn into actions |
+| Tokens | `token-architecture` | Three-layer token model, naming, theming, multi-platform |
+| Responsive | `responsive-patterns` | Content-driven breakpoints, layout shifts, fluid type, container queries |
+| Motion | `motion-choreography` | The three questions, duration guide, easing, stagger, reduced-motion |
+| Voice | `voice-and-tone` | Voice attributes, tone by context, vocabulary lists, reading level |
 | Verify | `verification-before-shipping` | Evidence it works. Not "I think it works." Evidence |
 
 Plus two coordination skills:
