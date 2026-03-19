@@ -70,8 +70,9 @@ Your word overrides everything. You're the creative director.
 ## The Workflow
 
 ```
-Discover → Research → Strategise → Plan → Design → Build → Review → Fix → Ship
+Discover → Research → Strategise → Taste → Plan → Design → Build → Review → Fix → Ship
                    ↑ accessibility in every phase, not a final step ↑
+                                     ↑ your judgement lives here ↑
 ```
 
 | Phase | Skill | What happens |
@@ -80,6 +81,7 @@ Discover → Research → Strategise → Plan → Design → Build → Review �
 | Research | `research-planning` | What to learn, which methods, from whom |
 | Personas | `inclusive-personas` | Full ability spectrum — permanent, temporary, situational |
 | Strategy | `design-strategy` | Principles, positioning, experience map, success metrics |
+| Taste | `design-taste` | Your aesthetic direction — references, emotional targets, craft standards, quality bar |
 | Plan | `writing-design-plans` | 2-5 minute tasks with accessibility checks per task |
 | UI | `ui-composition` | Layout, colour, typography — every choice meets WCAG |
 | Interaction | `interaction-design` | States, transitions, feedback, error handling |
@@ -101,6 +103,8 @@ Plus two coordination skills:
 - `design-state` — Shared living document that all agents read and update
 
 ## Key Features
+
+**Design taste** — The system prompts you for your aesthetic instincts: references you admire, how it should feel, what you'd hate. Upload an existing design system and it extracts the taste signals already embedded in your tokens and palette. Share your own thoughts and the agents carry your judgment through every decision. The more taste you give, the better the output — but the system works without it too. Your taste is the difference between correct and compelling.
 
 **Agent babble** — Agents write conversational handoff messages to each other. You see the relay. It's like watching your team think out loud.
 
@@ -127,6 +131,8 @@ Plus two coordination skills:
 **Evidence over claims.** Do not say it works until you can prove it works.
 
 **Inclusive by default.** Nothing About Us Without Us.
+
+**Your taste is your superpower.** Agents can verify that a design is correct — aligned to the brief, accessible, consistent. But they can't tell you whether it's *beautiful*. That's your job. Designpowers prompts you for your aesthetic judgment early and carries it through every decision. The more you share — references, feelings, instincts, an existing design system — the more elevated the output. If you volunteer nothing, the system still produces correct, accessible, well-structured design. But your taste is what makes it sing. The human in the loop isn't a bottleneck — they're the reason the work is any good.
 
 **Your skills, amplified.** Designpowers doesn't replace your design judgement — it gives you a team that executes it.
 
