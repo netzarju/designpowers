@@ -27,6 +27,7 @@ When Designpowers activates for the first time in a session (first design-relate
   │                                                 │
   │  ◆ design-strategist  ····  flows & direction   │
   │  ◆ design-scout       ····  research & evidence │
+  │  ◆ inspiration-scout  ····  aesthetic references │
   │  ◆ design-lead        ····  visual design       │
   │  ◆ motion-designer    ····  animation & motion  │
   │  ◆ content-writer     ····  words & copy        │
@@ -55,7 +56,10 @@ When Designpowers activates for the first time in a session (first design-relate
   • Describe what you want to build
   • Say "direct" or "auto" (defaults to direct)
   • Talk to any agent by name at any time
+  • Say "debate this" to see competing approaches argued
+  • Say "show me inspiration" for curated references
   • Your word is final — always
+  • Your taste is remembered across projects
 
   READY? Tell me what we're designing.
 
@@ -87,6 +91,9 @@ Before responding to ANY message — including clarifying questions — check wh
 | Personas | `inclusive-personas` | When defining who the design serves |
 | Strategy | `design-strategy` | When setting direction, principles, or competitive positioning |
 | Taste | `design-taste` | When calibrating aesthetic direction — references, emotional targets, craft standards, quality bar |
+| Memory | `design-memory` | At project start (load taste profile) and project end (consolidate taste learnings) |
+| Inspiration | `inspiration-scouting` | When the team needs aesthetic references, interaction examples, or visual direction beyond competitive research |
+| Debate | `design-debate` | When a design direction is uncertain and competing approaches should be argued before committing |
 | Plan | `writing-design-plans` | When a design spec exists and implementation needs breaking down |
 | UI | `ui-composition` | When building layouts, color, typography, visual hierarchy |
 | Interaction | `interaction-design` | When designing states, transitions, feedback, error handling |
@@ -94,16 +101,21 @@ Before responding to ANY message — including clarifying questions — check wh
 | Cognition | `cognitive-accessibility` | When evaluating mental load, wayfinding, focus management |
 | Adaptation | `adaptive-interfaces` | When designing for user preferences, motion sensitivity, flexibility |
 | Systems | `design-system-alignment` | When working with or building design tokens and components |
+| Taste Check | `taste-feedback` | During build phase — shows intermediate visual output for mid-flight taste correction |
 | Critique | `designpowers-critique` | When reviewing design work against the plan |
 | Handoff | `design-handoff` | When preparing specifications for engineering |
 | State | `design-state` | When any agent starts or completes work — maintains the shared design state |
 | Verify | `verification-before-shipping` | Before declaring any design work complete |
+| Retrospective | `design-retrospective` | After shipping — structured reflection that feeds learnings back into design-memory |
 
 ### Skill Priority
 
 1. **Process skills first** — design-discovery, writing-design-plans, designpowers-critique
-2. **Domain skills second** — ui-composition, interaction-design, accessible-content
-3. **Accessibility skills always** — cognitive-accessibility, adaptive-interfaces, inclusive-personas are woven through every phase, not bolted on at the end
+2. **Taste skills early** — design-memory (load at start), inspiration-scouting (before visual design), design-debate (when direction is uncertain)
+3. **Domain skills second** — ui-composition, interaction-design, accessible-content
+4. **Feedback skills during build** — taste-feedback (mid-flight course correction during design-builder execution)
+5. **Accessibility skills always** — cognitive-accessibility, adaptive-interfaces, inclusive-personas are woven through every phase, not bolted on at the end
+6. **Reflection skills at the end** — design-retrospective (after shipping, feeds back into design-memory)
 
 ## Accessibility Is Not a Phase
 
@@ -115,11 +127,14 @@ Accessibility is not a separate step. It is present in every skill. When working
 |----------|-----------|
 | About to write UI code without design-discovery | STOP. Invoke design-discovery first |
 | About to make visual design decisions without a taste profile | PAUSE. Ask if the user wants to run taste calibration. Not mandatory, but the design will be stronger with one |
+| Starting a new project without checking for existing taste profile | PAUSE. Invoke design-memory to load existing preferences |
+| Design direction is uncertain with multiple viable options | PAUSE. Invoke design-debate before committing |
 | Designing for a "typical user" without considering ability spectrum | STOP. Invoke inclusive-personas |
 | Skipping straight to visuals without strategy | STOP. Invoke design-strategy |
 | About to declare work complete without evidence | STOP. Invoke verification-before-shipping |
 | Building components without checking the design system | STOP. Invoke design-system-alignment |
 | Writing interface copy without considering reading levels | STOP. Invoke accessible-content |
+| Project complete but no retrospective run | PAUSE. Invoke design-retrospective to capture learnings |
 
 ## Agent Routing
 
@@ -139,6 +154,7 @@ Agents unique to Designpowers (no built-in equivalent):
 - **motion-designer** — animation choreography, micro-interactions, reduced motion
 - **accessibility-reviewer** — WCAG evaluation, cognitive accessibility, inclusive interaction
 - **design-critic** — plan alignment, brief adherence, gap identification
+- **inspiration-scout** — aesthetic references, cross-domain inspiration, mood board curation
 
 ## Handoff Babble
 
@@ -320,13 +336,20 @@ When the pipeline finishes (all agents done, fix rounds complete), show the user
   QUALITY:
   • Accessibility: [summary — e.g., "AA compliant, 13 fixes applied"]
   • Critic verdict: [proceed/revise — and key finding]
+  • Taste checks: [count and outcomes]
   • Fix rounds: [number]
 
   YOUR DECISIONS:
   • [list user overrides and corrections from the handoff chain]
 
+  TASTE LEARNED:
+  • [new taste insights from this project]
+
   MODE: [direct/auto/mixed]
-  Agents used: [X of 8]
+  Agents used: [X of 9]
+
+  → Run "retrospective" to reflect on this project
+    and update your taste profile for next time.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 ```
@@ -346,3 +369,6 @@ This summary:
 | "The user didn't ask for research" | Good design practice is not optional. The user hired a design process, not a pixel factory |
 | "Let me just quickly build this" | Speed without process produces rework. Slow down to go fast |
 | Using built-in agents when Designpowers is active | Built-in agents don't know about the brief, plan, or personas. Use Designpowers agents within the workflow |
+| "We don't need to debate this" when the team is uncertain | Premature convergence kills better options. When direction is unclear, run a design-debate |
+| Skipping the retrospective because the project is done | Done is not learned. The retrospective makes the next project better |
+| Not loading the taste profile at project start | The system already knows things about this user. Starting from zero wastes that knowledge |
