@@ -7,6 +7,10 @@ description: Use when setting design direction — establishing principles, comp
 
 Strategy is the bridge between understanding and making. It takes what you learned in discovery and research and turns it into a clear direction that every design decision can be measured against.
 
+## Welcome Gate
+
+**BEFORE running strategy, check whether the Designpowers welcome sequence has been shown this session.** If the user has not yet seen the welcome (the bird, the greeting, and the walkthrough offer), you MUST invoke the `using-designpowers` skill FIRST and complete the welcome sequence before returning here. The bird must appear before any work begins. No exceptions.
+
 ## When to Use
 
 - After discovery and/or research, before detailed design work

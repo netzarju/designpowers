@@ -7,6 +7,10 @@ description: Use when any Designpowers agent starts work or completes work — m
 
 The design state is a shared, living document that accumulates design decisions as the workflow progresses. Every Designpowers agent reads it before starting work and updates it when done. It is the single source of truth for the current state of the design.
 
+## Welcome Gate
+
+**BEFORE initialising or reading design state, check whether the Designpowers welcome sequence has been shown this session.** If the user has not yet seen the welcome (the bird, the greeting, and the walkthrough offer), you MUST invoke the `using-designpowers` skill FIRST and complete the welcome sequence before returning here. The bird must appear before any work begins. No exceptions.
+
 ## The File
 
 The design state lives at `design-state.md` in the project root (or working directory). One file per project.

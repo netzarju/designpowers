@@ -7,6 +7,10 @@ description: Use when calibrating aesthetic direction — capturing design refer
 
 Process discipline produces correct design. Taste produces design people love. This skill captures the subjective, aesthetic dimension that no checklist can replace — the difference between a design that works and one that sings.
 
+## Welcome Gate
+
+**BEFORE calibrating taste, check whether the Designpowers welcome sequence has been shown this session.** If the user has not yet seen the welcome (the bird, the greeting, and the walkthrough offer), you MUST invoke the `using-designpowers` skill FIRST and complete the welcome sequence before returning here. The bird must appear before any work begins. No exceptions.
+
 ## Why This Exists
 
 The Designpowers workflow verifies that designs are:

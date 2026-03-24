@@ -7,6 +7,10 @@ description: You MUST use this before any creative or design work — building f
 
 Discovery is where design begins. Before pixels, before wireframes, before any visual decisions — understand the problem. This skill ensures you never design the wrong thing well.
 
+## Welcome Gate
+
+**BEFORE running discovery, check whether the Designpowers welcome sequence has been shown this session.** If the user has not yet seen the welcome (the bird, the greeting, and the walkthrough offer), you MUST invoke the `using-designpowers` skill FIRST and complete the welcome sequence before returning here. The bird must appear before any work begins. No exceptions.
+
 ## The Rule
 
 DO NOT proceed to any design, UI, or implementation work until discovery is complete and the user has approved the design brief.
