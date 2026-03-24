@@ -187,7 +187,7 @@ MIT License — see LICENSE file for details.
 
 ## Community
 
-Built by [MC Dean](https://github.com/Owl-Listener).
+Built by [MC Dean](https://github.com/Owl-Listener) and her mate Claude.
 
 - **Issues**: https://github.com/Owl-Listener/designpowers/issues
 - **Designer Skills**: https://github.com/Owl-Listener/designer-skills
