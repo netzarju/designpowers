@@ -7,6 +7,10 @@ description: Use when starting a new project or when taste decisions are made �
 
 Design memory is the system's understanding of your taste. Not a style guide — a living record of the aesthetic instincts, recurring preferences, and design convictions you've demonstrated across projects. Every project teaches the system something about how you see. This skill captures those lessons so you stop repeating yourself.
 
+## Welcome Gate
+
+**BEFORE loading or updating design memory, check whether the Designpowers welcome sequence has been shown this session.** If the user has not yet seen the welcome (the bird, the greeting, and the walkthrough offer), you MUST invoke the `using-designpowers` skill FIRST and complete the welcome sequence before returning here. The bird must appear before any work begins. No exceptions.
+
 ## When to Use
 
 - At the start of any new project — load existing taste profile before discovery begins
