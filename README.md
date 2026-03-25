@@ -147,26 +147,20 @@ Plus two coordination skills:
 
 ## Installation
 
-### Claude Code
+### Claude Code — Desktop App
 
-**Option A: Work inside the repo (recommended)**
+If you use the Claude Code desktop app, type this in the chat:
 
-```bash
-git clone https://github.com/Owl-Listener/designpowers.git
-cd designpowers
+```
+/install Owl-Listener/designpowers
 ```
 
-That's it. The `CLAUDE.md` and `.claude/settings.json` in the repo ensure the welcome screen and onboarding run automatically when you start a session.
+That's it. Start a new session and describe something to design. You should see the bird.
 
-**Option B: Copy into your own project**
+### Claude Code — Terminal
 
 ```bash
-git clone https://github.com/Owl-Listener/designpowers.git
-cp -r designpowers/skills/ your-project/skills/
-cp -r designpowers/agents/ your-project/agents/
-cp -r designpowers/hooks/ your-project/hooks/
-cp designpowers/CLAUDE.md your-project/CLAUDE.md
-cp -r designpowers/.claude/ your-project/.claude/
+claude install Owl-Listener/designpowers
 ```
 
 ### Other AI Tools (Cursor, Windsurf, Copilot, Aider, etc.)
