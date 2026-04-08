@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - 143 homes found</title>
+    <style>
+        /* CSS Reset & Base */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            /* Colors */
+            --color-primary: #2B6CB0;
+            --color-primary-dark: #1E4E8C;
+            --color-accent: #E07A3D;
+            --color-text-primary: #1A202C;
+            --color-text-secondary: #4A5568;
+            --color-text-tertiary: #718096;
+            --color-border: #E2E8F0;
+            --color-border-hover: #CBD5E0;
+            --color-bg-page: #F7FAFC;
+            --color-bg-card: #FFFFFF;
+            --color-badge-bg: rgba(255, 255, 255, 0.95);
+            --color-status-new: #059669;
+            --color-status-reduced: #DC2626;
+            --color-status-open: #7C3AED;
+            --color-visited: #7C3AED;
+
+            /* Spacing (8px base) */
+            --space-1: 8px;
+            --space-2: 16px;
+            --space-3: 24px;
+            --space-4: 32px;
+            --space-6: 48px;
+
+            /* Typography */
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-bg-page);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--color-primary);
+            color: white;
+            padding: var(--space-1);
+            text-decoration: none;
+            z-index: 100;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-2);
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: var(--space-4);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                padding: var(--space-6);
+            }
+        }
+
+        /* Header */
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-bottom: var(--space-3);
+        }
+
+        .results-count {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .sort-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .sort-label {
+            font-size: 14px;
+            color: var(--color-text-secondary);
+        }
+
+        .sort-select {
+            padding: var(--space-1) var(--space-2);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            font-family: var(--font-family);
+            font-size: 14px;
+            color: var(--color-text-primary);
+            background-color: var(--color-bg-card);
+            cursor: pointer;
+            min-height: 48px;
+        }
+
+        .sort-select:hover {
+            border-color: var(--color-border-hover);
+        }
+
+        .sort-select:focus {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-2);
+            margin-bottom: var(--space-3);
+        }
+
+        @media (min-width: 768px) {
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-3);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .results-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Property Card */
+        .property-card {
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .property-card:hover {
+            border-color: var(--color-border-hover);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .property-card:focus-within {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        /* Card Image Container */
+        .card-image-container {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Status Badges */
+        .status-badges {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-1);
+        }
+
+        .status-badge {
+            background: var(--color-badge-bg);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(4px);
+        }
+
+        .status-badge.new {
+            color: var(--color-status-new);
+        }
+
+        .status-badge.reduced {
+            color: var(--color-status-reduced);
+        }
+
+        .status-badge.open-house {
+            color: var(--color-status-open);
+        }
+
+        .status-badge.pending {
+            color: var(--color-text-secondary);
+        }
+
+        /* Save Button */
+        .save-button {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--color-badge-bg);
+            backdrop-filter: blur(4px);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .save-button:hover {
+            background: white;
+            transform: scale(1.05);
+        }
+
+        .save-button:focus {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .save-button svg {
+            width: 24px;
+            height: 24px;
+            transition: all 0.2s ease;
+        }
+
+        .save-button.saved svg {
+            fill: var(--color-primary);
+        }
+
+        .save-button:not(.saved) svg {
+            fill: none;
+            stroke: var(--color-text-secondary);
+            stroke-width: 2;
+        }
+
+        /* Card Content */
+        .card-content {
+            padding: var(--space-2);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-1);
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .card-link:focus {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        .property-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: 4px;
+        }
+
+        @media (min-width: 1024px) {
+            .property-price {
+                font-size: 28px;
+            }
+        }
+
+        .card-link:visited .property-price {
+            color: var(--color-visited);
+        }
+
+        .property-specs {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--color-text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .property-days {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--color-text-tertiary);
+            margin-bottom: 4px;
+        }
+
+        .property-address {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.4;
+            margin-top: 4px;
+        }
+
+        @media (min-width: 1024px) {
+            .property-address {
+                font-size: 18px;
+            }
+        }
+
+        .property-price-per-sqft {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--color-text-tertiary);
+            margin-top: 4px;
+        }
+
+        /* Loading Skeleton */
+        .property-card.loading {
+            pointer-events: none;
+        }
+
+        .property-card.loading .card-image {
+            background: linear-gradient(90deg, #E2E8F0 25%, #F7FAFC 50%, #E2E8F0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        .property-card.loading .skeleton {
+            background: linear-gradient(90deg, #E2E8F0 25%, #F7FAFC 50%, #E2E8F0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 4px;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .skeleton-price {
+            height: 28px;
+            width: 120px;
+            margin-bottom: 12px;
+        }
+
+        .skeleton-specs {
+            height: 20px;
+            width: 180px;
+            margin-bottom: 8px;
+        }
+
+        .skeleton-days {
+            height: 18px;
+            width: 140px;
+            margin-bottom: 12px;
+        }
+
+        .skeleton-address {
+            height: 20px;
+            width: 100%;
+            margin-bottom: 6px;
+        }
+
+        /* Load More Button */
+        .load-more-container {
+            display: flex;
+            justify-content: center;
+            margin: var(--space-4) 0;
+        }
+
+        .load-more-button {
+            padding: 14px var(--space-4);
+            min-height: 48px;
+            font-family: var(--font-family);
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-primary);
+            background: var(--color-bg-card);
+            border: 2px solid var(--color-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .load-more-button:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .load-more-button:focus {
+            outline: 2px solid var(--color-primary);
+            outline-offset: 2px;
+        }
+
+        .load-more-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Hidden Cards */
+        .property-card.hidden {
+            display: none;
+        }
+
+        /* Screen Reader Only */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: var(--space-6) var(--space-2);
+        }
+
+        .empty-state h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .empty-state p {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <a href="#results" class="skip-link">Skip to results</a>
+
+    <div class="container">
+        <header class="results-header">
+            <h1 class="results-count" aria-live="polite">143 homes found</h1>
+            <nav class="sort-controls" aria-label="Sort options">
+                <label for="sort-select" class="sort-label">Sort by:</label>
+                <select id="sort-select" class="sort-select">
+                    <option value="newest">Newest first</option>
+                    <option value="price-low">Price (low to high)</option>
+                    <option value="price-high">Price (high to low)</option>
+                </select>
+            </nav>
+        </header>
+
+        <main id="results" role="main" aria-label="Search results">
+            <div class="results-grid" role="list">
+                <!-- Card 1: New listing -->
+                <article class="property-card" role="listitem">
+                    <div class="card-image-container">
+                        <img src="https://picsum.photos/seed/prop1/800/450" alt="" class="card-image" loading="lazy">
+                        <div class="status-badges">
+                            <span class="status-badge new">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 0l2.163 5.512L16 6.612l-4.5 3.888L13.026 16 8 12.512 2.974 16l1.526-5.5L0 6.612l5.837-1.1z"/>
+                                </svg>
+                                New
+                            </span>
+                        </div>
+                        <button class="save-button" aria-label="Save 847 Maple Street, Downtown to saved homes" data-address="847 Maple Street, Downtown">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <a href="#" class="card-link" data-price="425000" data-days="0">
+                            <span class="sr-only">847 Maple Street, Downtown - $425,000 - 3 bed, 2 bath, 1,450 square feet - Listed today - New listing</span>
+                            <div class="property-price">$425,000</div>
+                            <div class="property-specs">3 bd / 2 ba / 1,450 sqft</div>
+                            <div class="property-days">Listed today</div>
+                            <div class="property-address">
+                                847 Maple Street<br>
+                                Downtown
+                            </div>
+                            <div class="property-price-per-sqft">$294/sqft</div>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 2: Price Reduced -->
+                <article class="property-card" role="listitem">
+                    <div class="card-image-container">
+                        <img src="https://picsum.photos/seed/prop2/800/450" alt="" class="card-image" loading="lazy">
+                        <div class="status-badges">
+                            <span class="status-badge reduced">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 12l-4-4h8z"/>
+                                </svg>
+                                $10K off
+                            </span>
+                        </div>
+                        <button class="save-button" aria-label="Save 2341 Ocean Boulevard, Beachside to saved homes" data-address="2341 Ocean Boulevard, Beachside">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <a href="#" class="card-link" data-price="725000" data-days="5">
+                            <span class="sr-only">2341 Ocean Boulevard, Beachside - $725,000 - 4 bed, 3 bath, 2,380 square feet - Listed 5 days ago - Price reduced $10K</span>
+                            <div class="property-price">$725,000</div>
+                            <div class="property-specs">4 bd / 3 ba / 2,380 sqft</div>
+                            <div class="property-days">Listed 5 days ago</div>
+                            <div class="property-address">
+                                2341 Ocean Boulevard<br>
+                                Beachside
+                            </div>
+                            <div class="property-price-per-sqft">$305/sqft</div>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 3: Open House -->
+                <article class="property-card" role="listitem">
+                    <div class="card-image-container">
+                        <img src="https://picsum.photos/seed/prop3/800/450" alt="" class="card-image" loading="lazy">
+                        <div class="status-badges">
+                            <span class="status-badge open-house">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 1l8 6v8H0V7l8-6zm0 2.5L2 8v6h12V8L8 3.5z"/>
+                                </svg>
+                                Open Sat 1-3
+                            </span>
+                        </div>
+                        <button class="save-button saved" aria-label="Remove 156 Pine Ridge Drive, Hillside from saved homes" data-address="156 Pine Ridge Drive, Hillside">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <a href="#" class="card-link" data-price="589000" data-days="12">
+                            <span class="sr-only">156 Pine Ridge Drive, Hillside - $589,000 - 3 bed, 2.5 bath, 1,820 square feet - Listed 12 days ago - Open house Saturday 1-3pm</span>
+                            <div class="property-price">$589,000</div>
+                            <div class="property-specs">3 bd / 2.5 ba / 1,820 sqft</div>
+                            <div class="property-days">Listed 12 days ago</div>
+                            <div class="property-address">
+                                156 Pine Ridge Drive<br>
+                                Hillside
+                            </div>
+                            <div class="property-price-per-sqft">$324/sqft</div>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 4: Standard listing -->
+                <article class="property-card" role="listitem">
+                    <div class="card-image-container">
+                        <img src="https://picsum.photos/seed/prop4/800/450" alt="" class="card-image" loading="lazy">
+                        <button class="save-button" aria-label="Save 92 Willow Lane, Riverside to saved homes" data-address="92 Willow Lane, Riverside">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <a href="#" class="card-link" data-price="365000" data-days="1">
+                            <span class="sr-only">92 Willow Lane, Riverside - $365,000 - 2 bed, 2 bath, 1,100 square feet - Listed yesterday</span>
+                            <div class="property-price">$365,000</div>
+                            <div class="property-specs">2 bd / 2 ba / 1,100 sqft</div>
+                            <div class="property-days">Listed yesterday</div>
+                            <div class="property-address">
+                                92 Willow Lane<br>
+                                Riverside
+                            </div>
+                            <div class="property-price-per-sqft">$332/sqft</div>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 5: Pending -->
+                <article class="property-card" role="listitem">
+                    <div class="card-image-container">
+                        <img src="https://picsum.photos/seed/prop5/800/450" alt="" class="card-image" loading="lazy">
+                        <div class="status-badges">
+                            <span class="status-badge pending">Pending</span>
+                        </div>
+                        <button class="save-button" aria-label="Save 478 Cedar Court, Woodland to saved homes" data-address="478 Cedar Court, Woodland">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <a href="#" class="card-link" data-price="515000" data-days="28">
+                            <span class="sr-only">478 Cedar Court, Woodland - $515,000 - 3 bed, 2 bath, 1,650 square feet - Listed 28 days ago - Pending</span>
+                            <div class="property-price">$515,000</div>
+                            <div class="property-specs">3 bd / 2 ba / 1,650 sqft</div>
+                            <div class="property-days">Listed 28 days ago</div>
+                            <div class="property-address">
+                                478 Cedar Court<br>
+                                Woodland
+                            </div>
+                            <div class="property-price-per-sqft">$312/sqft</div>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 6: New and Open House -->
+                <article class="property-card" role="listitem">
+                    <div class="card-image-container">
+                        <img src="https://picsum.photos/seed/prop6/800/450" alt="" class="card-image" loading="lazy">
+                        <div class="status-badges">
+                            <span class="status-badge new">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 0l2.163 5.512L16 6.612l-4.5 3.888L13.026 16 8 12.512 2.974 16l1.526-5.5L0 6.612l5.837-1.1z"/>
+                                </svg>
+                                New
+                            </span>
+                            <span class="status-badge open-house">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 1l8 6v8H0V7l8-6zm0 2.5L2 8v6h12V8L8 3.5z"/>
+                                </svg>
+                                Open Sat 1-3
+                            </span>
+                        </div>
+                        <button class="save-button" aria-label="Save 1203 Valley View Road, Mountain Heights to saved homes" data-address="1203 Valley View Road, Mountain Heights">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <a href="#" class="card-link" data-price="895000" data-days="0">
+                            <span class="sr-only">1203 Valley View Road, Mountain Heights - $895,000 - 5 bed, 4 bath, 3,200 square feet - Listed today - New listing - Open house Saturday 1-3pm</span>
+                            <div class="property-price">$895,000</div>
+                            <div class="property-specs">5 bd / 4 ba / 3,200 sqft</div>
+                            <div class="property-days">Listed today</div>
+                            <div class="property-address">
+                                1203 Valley View Road<br>
+                                Mountain Heights
+                            </div>
+                            <div class="property-price-per-sqft">$280/sqft</div>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 7: Long time on market -->
+                <article class="property-card" role="listitem">
+                    <div class="card-image-container">
+                        <img src="https://picsum.photos/seed/prop7/800/450" alt="" class="card-image" loading="lazy">
+                        <button class="save-button saved" aria-label="Remove 64 Sunset Drive, Westside from saved homes" data-address="64 Sunset Drive, Westside">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <a href="#" class="card-link" data-price="299000" data-days="45">
+                            <span class="sr-only">64 Sunset Drive, Westside - $299,000 - 2 bed, 1 bath, 950 square feet - Listed 6 weeks ago</span>
+                            <div class="property-price">$299,000</div>
+                            <div class="property-specs">2 bd / 1 ba / 950 sqft</div>
+                            <div class="property-days">Listed 6 weeks ago</div>
+                            <div class="property-address">
+                                64 Sunset Drive<br>
+                                Westside
+                            </div>
+                            <div class="property-price-per-sqft">$315/sqft</div>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Card 8: Loading skeleton -->
+                <article class="property-card loading" role="listitem" aria-busy="true" aria-live="polite">
+                    <div class="card-image-container">
+                        <div class="card-image"></div>
+                    </div>
+                    <div class="card-content">
+                        <div class="skeleton skeleton-price"></div>
+                        <div class="skeleton skeleton-specs"></div>
+                        <div class="skeleton skeleton-days"></div>
+                        <div class="skeleton skeleton-address"></div>
+                        <div class="skeleton skeleton-address" style="width: 60%;"></div>
+                        <span class="sr-only">Loading search results.</span>
+                    </div>
+                </article>
+
+                <!-- Hidden cards for Load More functionality -->
+                <article class="property-card hidden" role="listitem">
+                    <div class="card-image-container">
+                        <img src="https://picsum.photos/seed/prop9/800/450" alt="" class="card-image" loading="lazy">
+                        <button class="save-button" aria-label="Save 321 Elm Street, Central District to saved homes" data-address="321 Elm Street, Central District">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <a href="#" class="card-link" data-price="475000" data-days="7">
+                            <span class="sr-only">321 Elm Street, Central District - $475,000 - 3 bed, 2 bath, 1,550 square feet - Listed 7 days ago</span>
+                            <div class="property-price">$475,000</div>
+                            <div class="property-specs">3 bd / 2 ba / 1,550 sqft</div>
+                            <div class="property-days">Listed 7 days ago</div>
+                            <div class="property-address">
+                                321 Elm Street<br>
+                                Central District
+                            </div>
+                            <div class="property-price-per-sqft">$306/sqft</div>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="property-card hidden" role="listitem">
+                    <div class="card-image-container">
+                        <img src="https://picsum.photos/seed/prop10/800/450" alt="" class="card-image" loading="lazy">
+                        <div class="status-badges">
+                            <span class="status-badge reduced">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 12l-4-4h8z"/>
+                                </svg>
+                                $10K off
+                            </span>
+                        </div>
+                        <button class="save-button" aria-label="Save 789 Park Avenue, Uptown to saved homes" data-address="789 Park Avenue, Uptown">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card-content">
+                        <a href="#" class="card-link" data-price="650000" data-days="18">
+                            <span class="sr-only">789 Park Avenue, Uptown - $650,000 - 4 bed, 3 bath, 2,100 square feet - Listed 18 days ago - Price reduced $10K</span>
+                            <div class="property-price">$650,000</div>
+                            <div class="property-specs">4 bd / 3 ba / 2,100 sqft</div>
+                            <div class="property-days">Listed 18 days ago</div>
+                            <div class="property-address">
+                                789 Park Avenue<br>
+                                Uptown
+                            </div>
+                            <div class="property-price-per-sqft">$310/sqft</div>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="load-more-container">
+                <button class="load-more-button" id="load-more-btn">Show more homes</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Save/Favorite functionality
+        document.querySelectorAll('.save-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const isSaved = button.classList.toggle('saved');
+                const address = button.dataset.address;
+
+                if (isSaved) {
+                    button.setAttribute('aria-label', `Remove ${address} from saved homes`);
+                } else {
+                    button.setAttribute('aria-label', `Save ${address} to saved homes`);
+                }
+            });
+        });
+
+        // Load More functionality
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        const hiddenCards = document.querySelectorAll('.property-card.hidden');
+        let currentlyShown = 0;
+        const cardsPerLoad = 3;
+
+        loadMoreBtn.addEventListener('click', () => {
+            const cardsToShow = Array.from(hiddenCards).slice(currentlyShown, currentlyShown + cardsPerLoad);
+
+            cardsToShow.forEach(card => {
+                card.classList.remove('hidden');
+            });
+
+            currentlyShown += cardsToShow.length;
+
+            // Hide button if all cards are shown
+            if (currentlyShown >= hiddenCards.length) {
+                loadMoreBtn.style.display = 'none';
+            }
+        });
+
+        // Sort functionality
+        const sortSelect = document.getElementById('sort-select');
+        const resultsGrid = document.querySelector('.results-grid');
+
+        sortSelect.addEventListener('change', (e) => {
+            const sortValue = e.target.value;
+            const cards = Array.from(resultsGrid.querySelectorAll('.property-card:not(.loading)'));
+
+            cards.sort((a, b) => {
+                const linkA = a.querySelector('.card-link');
+                const linkB = b.querySelector('.card-link');
+
+                if (!linkA || !linkB) return 0;
+
+                switch(sortValue) {
+                    case 'price-low':
+                        return parseInt(linkA.dataset.price) - parseInt(linkB.dataset.price);
+                    case 'price-high':
+                        return parseInt(linkB.dataset.price) - parseInt(linkA.dataset.price);
+                    case 'newest':
+                        return parseInt(linkA.dataset.days) - parseInt(linkB.dataset.days);
+                    default:
+                        return 0;
+                }
+            });
+
+            // Reorder the cards in the DOM
+            cards.forEach(card => {
+                resultsGrid.appendChild(card);
+            });
+
+            // Keep loading skeleton at the end
+            const loadingCard = resultsGrid.querySelector('.property-card.loading');
+            if (loadingCard) {
+                resultsGrid.appendChild(loadingCard);
+            }
+        });
+
+        // Keyboard navigation for cards
+        document.querySelectorAll('.card-link').forEach(link => {
+            link.addEventListener('keydown', (e) => {
+                if (e.key === ' ') {
+                    e.preventDefault();
+                    const saveButton = link.closest('.property-card').querySelector('.save-button');
+                    if (saveButton) {
+                        saveButton.click();
+                    }
+                }
+            });
+        });
+
+        // Simulate loading completion after 2 seconds
+        setTimeout(() => {
+            const loadingCard = document.querySelector('.property-card.loading');
+            if (loadingCard) {
+                loadingCard.classList.remove('loading');
+                loadingCard.setAttribute('aria-busy', 'false');
+
+                // Replace with actual content
+                loadingCard.querySelector('.card-image-container').innerHTML = `
+                    <img src="https://picsum.photos/seed/prop8/800/450" alt="" class="card-image" loading="lazy">
+                    <button class="save-button" aria-label="Save 555 Broadway, Theater District to saved homes" data-address="555 Broadway, Theater District">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </button>
+                `;
+
+                loadingCard.querySelector('.card-content').innerHTML = `
+                    <a href="#" class="card-link" data-price="550000" data-days="3">
+                        <span class="sr-only">555 Broadway, Theater District - $550,000 - 3 bed, 2 bath, 1,700 square feet - Listed 3 days ago</span>
+                        <div class="property-price">$550,000</div>
+                        <div class="property-specs">3 bd / 2 ba / 1,700 sqft</div>
+                        <div class="property-days">Listed 3 days ago</div>
+                        <div class="property-address">
+                            555 Broadway<br>
+                            Theater District
+                        </div>
+                        <div class="property-price-per-sqft">$324/sqft</div>
+                    </a>
+                `;
+
+                // Re-attach event listeners
+                const newSaveBtn = loadingCard.querySelector('.save-button');
+                newSaveBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const isSaved = newSaveBtn.classList.toggle('saved');
+                    const address = newSaveBtn.dataset.address;
+                    newSaveBtn.setAttribute('aria-label', isSaved ? `Remove ${address} from saved homes` : `Save ${address} to saved homes`);
+                });
+            }
+        }, 2000);
+    </script>
+</body>
+</html>

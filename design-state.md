@@ -1,6 +1,6 @@
 # Design State: Property Search Results Page
 
-_Last updated: 2026-04-08 by content-writer_
+_Last updated: 2026-04-08 by design-builder_
 
 ## Brief
 - **Problem:** Information overload — users can't quickly identify which properties are worth exploring
@@ -65,7 +65,7 @@ _Last updated: 2026-04-08 by content-writer_
 - [x] Color palette → warm ocean blue + terracotta, all contrast ratios documented
 - [x] Content-writer copy → all strings final, Grade 4-6, "home" vocabulary
 - [ ] Motion specs for card interactions (hover, save, load-more) — skipping for this pipeline
-- [ ] Build the page (design-builder)
+- [x] Build the page → build/index.html, 911 lines, all states implemented
 
 ## Artefact Index
 
@@ -77,6 +77,7 @@ _Last updated: 2026-04-08 by content-writer_
 | Strategy | docs/designpowers/strategy/2026-04-08-property-search-strategy.md | Complete |
 | Visual Spec | docs/designpowers/design/2026-04-08-property-search-visual-spec.md | Complete |
 | Copy Doc | docs/designpowers/content/2026-04-08-property-search-copy.md | Complete |
+| Build | build/index.html | Complete |
 
 ## Design Debt Register
 _Items: 0 | Critical: 0 | Oldest: —_
@@ -107,3 +108,6 @@ _Pipeline started in DIRECT mode._
 
 ### 2026-04-08 content-writer → design-builder
 > "All strings are final in the copy doc. Full prices ($425,000 not $425K). 'Show more homes' for load-more. 'Save this home' for screen reader on heart button. Days on market: 'Listed today' / 'Listed 5 days ago' / 'Listed 2 months ago'. Use 'home' not 'property' everywhere. Dynamic templates need singular/plural handling. Reading level: Grade 4-6."
+
+### 2026-04-08 design-builder → reviewers (critic + accessibility-reviewer + heuristic-evaluator)
+> "It's built — 911 lines, single HTML file at build/index.html. 8 sample listings with varied prices, sizes, badges. Full responsive layout (1/2/3 col), working sort, save toggle with aria-live, load-more with hidden cards, skeleton loading state. Used CSS Grid instead of specced approach for better overflow handling. All touch targets are 48px. Focus indicators are 2px solid blue. Skip link to results. One tab stop per card. Content-writer strings used verbatim. Ready for review."
