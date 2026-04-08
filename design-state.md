@@ -1,6 +1,6 @@
 # Design State: Property Search Results Page
 
-_Last updated: 2026-04-08 by design-strategist_
+_Last updated: 2026-04-08 by design-lead_
 
 ## Brief
 - **Problem:** Information overload — users can't quickly identify which properties are worth exploring
@@ -25,8 +25,8 @@ _Last updated: 2026-04-08 by design-strategist_
 - **Emotional target:** Trustworthy, fast, respectful of time
 - **Quality level:** Production
 - **Key references:** Zillow (data-heavy), Redfin (clean but impersonal)
-- **Aesthetic principles:** _Pending full taste calibration_
-- **Taste document:** _Not yet created_
+- **Aesthetic principles:** Clean enough to scan, warm enough to feel human; ocean blue + terracotta palette
+- **Taste document:** docs/designpowers/design/2026-04-08-property-search-visual-spec.md
 
 ## Decisions Log
 
@@ -44,15 +44,23 @@ _Last updated: 2026-04-08 by design-strategist_
 | 2026-04-08 | design-strategist | Status badges on photo as high-contrast overlays (max 3) | User direction: surface "price reduced" and "new listing" prominently |
 | 2026-04-08 | design-strategist | 4 inclusive personas: Maya, Robert, Aisha, David | Cover speed, accessibility, stress, and compliance testing |
 | 2026-04-08 | design-strategist | 4 design principles | Three seconds to signal, accessibility non-negotiable, hierarchy > density, time pressure not urgency theater |
+| 2026-04-08 | design-lead | Ocean blue (#2B6CB0) + terracotta (#E07A3D) palette | Warm and trustworthy; terracotta for price gives warmth without sterility |
+| 2026-04-08 | design-lead | System font stack (no web fonts) | Performance priority; faster LCP on mobile |
+| 2026-04-08 | design-lead | 8px base spacing unit, 16px card padding | Consistent rhythm, generous whitespace for scannability |
+| 2026-04-08 | design-lead | Status badges: icon + text on white overlay | Colorblind-safe; Robert can read without color distinction |
+| 2026-04-08 | design-lead | 48px circular save button on photo top-right | Meets touch target minimum; expected position from competitor research |
+| 2026-04-08 | design-lead | 16:9 photo aspect ratio at 50% card height | Balances engagement and info density per scout findings |
 
 ## Open Questions
 
 - [x] Pagination vs infinite scroll vs virtual scroll? → Load-more mobile, pagination desktop
 - [x] How to differentiate from Zillow/Redfin? → Accessibility-first, time-respecting, honest status info
 - [x] Final information hierarchy on card → photo → price → beds/baths/sqft → days on market → address → price/sqft → CTA
-- [ ] Typography scale and color system with WCAG 2.1 AA baked in
-- [ ] Save/favorite interaction pattern
-- [ ] Color palette that feels trustworthy and warm (not sterile like Redfin)
+- [x] Typography scale and color system → system fonts, ocean blue + terracotta, full scale defined
+- [x] Save/favorite interaction pattern → 48px circular button, heart icon, top-right of photo
+- [x] Color palette → warm ocean blue + terracotta, all contrast ratios documented
+- [ ] Content-writer copy for card labels, load-more button, status badges, empty states
+- [ ] Motion specs for card interactions (hover, save, load-more)
 
 ## Artefact Index
 
@@ -62,6 +70,7 @@ _Last updated: 2026-04-08 by design-strategist_
 | Competitive Analysis | docs/designpowers/research/2026-04-08-property-search-competitive-analysis.md | Complete |
 | Personas | docs/designpowers/personas/2026-04-08-property-search-personas.md | Complete |
 | Strategy | docs/designpowers/strategy/2026-04-08-property-search-strategy.md | Complete |
+| Visual Spec | docs/designpowers/design/2026-04-08-property-search-visual-spec.md | Complete |
 
 ## Design Debt Register
 _Items: 0 | Critical: 0 | Oldest: —_
@@ -83,3 +92,9 @@ _Pipeline started in DIRECT mode._
 
 ### 2026-04-08 design-strategist → design-lead
 > "Four personas, four principles, card hierarchy locked. Maya is your speed test (3 seconds in sunlight), Robert is your accessibility test (colorblind + keyboard), Aisha is your stress test (low literacy, financial pressure), David is your compliance canary (blind, screen reader). Status badges must be colorblind-safe — text + icons, not color-only. Touch targets 48px minimum. Days on market is non-negotiable. Typography scale: price 24px mobile/28px desktop, metadata 16px, secondary 14px. Whitespace is strategic. Go make it beautiful — and make it work for everyone."
+
+### 2026-04-08 design-lead → content-writer
+> "Cards have tight space constraints. Price label: none needed, it's obvious. Beds/baths format: '3 bd / 2 ba / 1,450 sqft'. Status badges: 'New', 'Price Reduced', 'Open House' — keep it short, no articles. Load-more button text needed. Empty state copy needed. Address format: street + neighborhood, no city/state (that's in the search context). Write for Aisha — Grade 4 reading level, no jargon."
+
+### 2026-04-08 design-lead → design-builder
+> "Full visual spec at docs/designpowers/design/2026-04-08-property-search-visual-spec.md. Ocean blue + terracotta palette, system fonts, 8px grid. Cards are 16:9 photo at 50%, price in terracotta at 24px, beds/baths with icons, days on market gets its own line. Status badges overlay photo top-left with white semi-transparent background. Save button is 48px circle top-right. One tab stop per card. Load-more button, not infinite scroll. Build mobile-first. Wait for content-writer's copy before implementing labels."
