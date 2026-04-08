@@ -1,6 +1,6 @@
 # Design State: Property Search Results Page
 
-_Last updated: 2026-04-08 by design-lead_
+_Last updated: 2026-04-08 by content-writer_
 
 ## Brief
 - **Problem:** Information overload — users can't quickly identify which properties are worth exploring
@@ -50,6 +50,10 @@ _Last updated: 2026-04-08 by design-lead_
 | 2026-04-08 | design-lead | Status badges: icon + text on white overlay | Colorblind-safe; Robert can read without color distinction |
 | 2026-04-08 | design-lead | 48px circular save button on photo top-right | Meets touch target minimum; expected position from competitor research |
 | 2026-04-08 | design-lead | 16:9 photo aspect ratio at 50% card height | Balances engagement and info density per scout findings |
+| 2026-04-08 | content-writer | "home" not "property" or "listing" | "Property" feels clinical; "home" is warm, Grade 2 reading level |
+| 2026-04-08 | content-writer | Full prices ($425,000) not abbreviated ($425K) | Builds trust; Aisha needs unambiguous numbers |
+| 2026-04-08 | content-writer | "Listed X days ago" for days on market | Conversational, Grade 3, warmer than "X days on market" |
+| 2026-04-08 | content-writer | Grade 4-6 reading level target | Serves Aisha (low literacy) and Maya (ESL) |
 
 ## Open Questions
 
@@ -59,8 +63,9 @@ _Last updated: 2026-04-08 by design-lead_
 - [x] Typography scale and color system → system fonts, ocean blue + terracotta, full scale defined
 - [x] Save/favorite interaction pattern → 48px circular button, heart icon, top-right of photo
 - [x] Color palette → warm ocean blue + terracotta, all contrast ratios documented
-- [ ] Content-writer copy for card labels, load-more button, status badges, empty states
-- [ ] Motion specs for card interactions (hover, save, load-more)
+- [x] Content-writer copy → all strings final, Grade 4-6, "home" vocabulary
+- [ ] Motion specs for card interactions (hover, save, load-more) — skipping for this pipeline
+- [ ] Build the page (design-builder)
 
 ## Artefact Index
 
@@ -71,6 +76,7 @@ _Last updated: 2026-04-08 by design-lead_
 | Personas | docs/designpowers/personas/2026-04-08-property-search-personas.md | Complete |
 | Strategy | docs/designpowers/strategy/2026-04-08-property-search-strategy.md | Complete |
 | Visual Spec | docs/designpowers/design/2026-04-08-property-search-visual-spec.md | Complete |
+| Copy Doc | docs/designpowers/content/2026-04-08-property-search-copy.md | Complete |
 
 ## Design Debt Register
 _Items: 0 | Critical: 0 | Oldest: —_
@@ -98,3 +104,6 @@ _Pipeline started in DIRECT mode._
 
 ### 2026-04-08 design-lead → design-builder
 > "Full visual spec at docs/designpowers/design/2026-04-08-property-search-visual-spec.md. Ocean blue + terracotta palette, system fonts, 8px grid. Cards are 16:9 photo at 50%, price in terracotta at 24px, beds/baths with icons, days on market gets its own line. Status badges overlay photo top-left with white semi-transparent background. Save button is 48px circle top-right. One tab stop per card. Load-more button, not infinite scroll. Build mobile-first. Wait for content-writer's copy before implementing labels."
+
+### 2026-04-08 content-writer → design-builder
+> "All strings are final in the copy doc. Full prices ($425,000 not $425K). 'Show more homes' for load-more. 'Save this home' for screen reader on heart button. Days on market: 'Listed today' / 'Listed 5 days ago' / 'Listed 2 months ago'. Use 'home' not 'property' everywhere. Dynamic templates need singular/plural handling. Reading level: Grade 4-6."
